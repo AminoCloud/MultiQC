@@ -1,0 +1,27 @@
+apiVersion: aminocloud.io/v1
+kind: PipelineOperator
+metadata:
+  name: MultiQC
+  description: "Aggregates results from multiple bioinformatics tools into a single interactive HTML report."
+  version: "1.21"
+  author: Phil Ewels
+  category: qc
+  instrumentModes: [illumina, ion_torrent]
+  tags: [qc, report, aggregate]
+inputs:
+  - id: reports_in
+    name: QC Reports
+    dataType: REPORT
+    required: true
+outputs:
+  - id: report_out
+    name: Combined Report
+    dataType: REPORT
+compute:
+  cpu: 1
+  memoryGb: 2
+  gpuRequired: false
+  estimatedMinutes: 5
+docker:
+  image: acr.aminocloud.io/aminocloud/multiqc
+  tag: "1.21"
